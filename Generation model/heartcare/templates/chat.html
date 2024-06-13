@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat</title>
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+    <style>
+        body {
+            font-family: "Arial", sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .chat-container {
+            width: 80%;
+            max-width: 1200px;
+            background: rgb(37,32,63);
+            background: linear-gradient(0deg, rgba(37,32,63,1) 0%, rgba(68,35,113,1) 100%);
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        .chat-header {
+            background: rgb(27, 27, 27);
+            border-radius: 0px 0px 25px 25px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            color: #fff;
+            padding: 20px;
+            font-size: 24px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .chat-messages {
+            padding: 20px;
+            max-height: 400px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .message {
+            padding: 10px 15px;
+            border-radius: 20px;
+            max-width: 70%;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            white-space: pre-wrap; /* This ensures long text will wrap */
+            flex-grow: 1; /* Allow the message to grow horizontally */
+        }
+        .user-message {
+            background: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            color: white;
+            align-self: flex-end;
+            text-align: right;
+        }
+        .bot-message {
+            background-color: white;
+            color: black;
+            align-self: flex-start;
+        }
+        .chat-input {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+        }
+        .chat-input input {
+            background: white;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            color: black;
+            flex: 1;
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 20px 0px 0px 20px;
+            margin-right: 10px;
+            height: auto; /* Set height to auto for dynamic height */
+            min-height: 40px; /* Minimum height of the input area */
+            max-height: 120px; /* Maximum height of the input area */
+            overflow-y: auto; /* Enable vertical scrolling when content exceeds max-height */
+        }
+        .send-button {
+            padding: 15px 20px;
+            font-size: 24px;
+            background-color: white;
+            color: black;
+            border: none;
+            border-radius: 0px 25px 25px 0px;
+            cursor: pointer;
+        }
+        .send-button:hover {
+            background-color: #0056b3;
+            color: white;
+        }
+        .delete-button-form {
+            margin-top: 0px;
+            text-align: center;
+            padding-bottom: 10px;
+        }
+        .delete-button {
+            padding: 10px 20px;
+            font-weight: bold;
+            font-size: 16px;
+            background: #e00b32;
+            color: #fff;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+        .delete-button:hover {
+            background-color: #0056b3;
+        }
+        .view-report-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: white;
+            font-weight: bold;
+            color: black;
+            border: 2px solid black;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+        .view-report-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-header">Heart Care: Bot</div>
+        <div class="chat-messages" id="chatMessages">
+            {% for entry in chat_history %}
+                    <div class="message user-message">{{ entry.user_input }}</div>
+                    <div class="message bot-message">{{ entry.generated_output }}</div>
+            {% endfor %}
+        </div>
+        <form method="post">
+            {% csrf_token %}
+            <div class="chat-input">
+              <input type="text" id="user_input" name="user_input" placeholder="Type a message..." />
+              <button class="send-button" type="submit">
+                <i class="fa-regular fa-paper-plane"></i>
+              </button>
+            </div>
+          </form>
+        <div class="delete-button-form">
+            <form action="{% url 'delete_all_entries' %}" method="post">
+                {% csrf_token %}
+                <button class="delete-button" type="submit">Delete All Entries</button>
+                <a target="_blank" href="http://127.0.0.1:8000/home/view_report">
+                    <button class="view-report-button" >View Report</button>
+                </a>
+                <a  target="_blank" href="http://127.0.0.1:8000/home/">
+                    <button class="view-report-button">New Input Data</button>
+                </a>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart Care - Report</title>
+    <!-- Include Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Include html2pdf Script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.js"></script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1, h4 {
+            text-align: center;
+        }
+        h4 {
+            color: #6c757d;
+        }
+        .report-content {
+            margin-top: 30px;
+            white-space: pre-wrap;
+        }
+        .action-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 24px;
+            font-size: 18px;
+            text-align: center;
+            color: white;
+            background-color: #1C2D46;
+            border-radius: 5px;
+           
+            transition: background-color 0.3s ease;
+        }
+        .action-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="reportContainer">
+        <h1>Heart Care</h1>
+        <h4 id="dateTimePlaceholder">Fetching date and time...</h4>
+        <div class="report-content">
+            <p>Here is your report as per the information which has been given by you:</p>
+            <p>{{ report }}</p>
+        </div>
+        <div class="text-center">
+            <button id="savePdfBtn" class="action-btn">Save as PDF</button>
+            <a href="http://127.0.0.1:8000/home/chat">
+                <button id="savePdfBtn" class="action-btn"  style="text-decoration: none;">Chat with the Bot</button>
+              </a>            
+        </div>
+    </div>
+
+    <!-- Include Bootstrap JS (optional) -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        // Function to get and display current date and time
+        function getCurrentDateTime() {
+            const currentDate = new Date();
+            const options = {
+                year: 'numeric', month: 'long', day: 'numeric',
+                hour: 'numeric', minute: 'numeric', second: 'numeric',
+                hour12: true
+            };
+            const formattedDateTime = currentDate.toLocaleDateString('en-US', options);
+            document.getElementById('dateTimePlaceholder').textContent = formattedDateTime;
+        }
+
+        // Function to generate and download PDF
+        function saveAsPDF() {
+            const element = document.getElementById('reportContainer'); // Get the container to convert to PDF
+            const options = {
+                margin: 10,
+                filename: 'heart_care_report.pdf',
+                image: { type: 'jpeg', quality: 1 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+
+            // Remove action buttons before converting to PDF
+            const actionButtons = element.querySelectorAll('.action-btn');
+            actionButtons.forEach(btn => btn.remove());
+
+            // Convert and save as PDF
+            html2pdf().set(options).from(element).save();
+        }
+
+        // Attach click event listener to the Save as PDF button
+        document.getElementById('savePdfBtn').addEventListener('click', saveAsPDF);
+
+        // Call getCurrentDateTime() when the page is loaded
+        document.addEventListener('DOMContentLoaded', getCurrentDateTime);
+    </script>
+</body>
+</html>

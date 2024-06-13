@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Result</title>
+    <!-- Include Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+        h1 {
+            color: #343a40;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        p {
+            color: #6c757d;
+            font-size: 18px;
+            text-align: center;
+        }
+        hr {
+            border-top: 1px solid #dee2e6;
+            margin: 40px 0;
+        }
+        a {
+            display: block;
+            margin-bottom: 10px;
+            padding: 10px 20px;
+            font-size: 18px;
+            text-align: center;
+            color: #fff;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        .view_report{
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 24px;
+            font-size: 18px;
+            text-align: center;
+            color: white;
+            background-color: #1C2D46;
+            border-radius: 5px;
+           
+            transition: background-color 0.3s ease;
+        }
+        .view_report:hover{
+            
+            background-color: #0056b3;
+        }
+        .chat_bot{
+                display: inline-block;
+            margin-top: 20px;
+            padding: 12px 24px;
+            font-size: 18px;
+            text-align: center;
+            color: white;
+            background-color: #1C2D46;
+            border-radius: 5px;
+           
+            transition: background-color 0.3s ease;
+        }
+        .chat_bot:hover{
+            
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Heart Care</h1>
+        <h1>Result</h1>
+        <p>Prediction: {{ prediction }}</p>
+        <div class="row">
+            <div class="col-md-6">
+                
+                <a href="http://127.0.0.1:8000/home/view_report">
+                    <button class="view_report">View your report</button>
+                </a>
+            </div>
+            <div class="col-md-6">
+                <a href="http://127.0.0.1:8000/home/chat">
+                    <button class="chat_bot">Use Chat Bot</button>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Include Bootstrap JS (optional) -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

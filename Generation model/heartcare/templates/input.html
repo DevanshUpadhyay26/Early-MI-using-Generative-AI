@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Input Form</title>
+    <!-- Bootstrap CSS (you may need to adjust the URL based on your project setup) -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Custom CSS for additional styling */
+        body {
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+        }
+        .form-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: box-shadow 0.3s ease;
+        }
+        .form-container:hover {
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+        .form-group label {
+            font-weight: bold;
+            color: #1C2D46;
+            margin-bottom: 5px;
+        }
+        .form-group input[type="text"],
+        .form-group input[type="number"],
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            transition: border-color 0.3s ease;
+        }
+        .form-group input[type="text"]:focus,
+        .form-group input[type="number"]:focus,
+        .form-group select:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+        .form-group .btn-primary {
+            padding: 12px 30px;
+            font-size: 18px;
+            background-color: #1C2D46;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .form-group .btn-primary:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="form-container">
+        <h1 class="text-center mb-4" style="color: #1C2D46;">Heart Care 🫀</h1>
+        <h3 class="text-center mb-4" style="color: #1C2D46; padding-bottom: 20px;">Please Enter Your Details</h3>
+        <form method="post">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="id_Age">Age:</label>
+                        {{ form.Age }}
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="id_Gender">Gender:</label>
+                        {{ form.Gender }}
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="id_ECG">ECG:</label>
+                        {{ form.ECG }}
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="id_CKMB">CKMB:</label>
+                        {{ form.CKMB }}
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="id_Trop_I">Trop I:</label>
+                        {{ form.Trop_I }}
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="id_LAD">LAD:</label>
+                        {{ form.LAD }}
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="id_LCA">LCA:</label>
+                        {{ form.LCA }}
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="id_RCA">RCA:</label>
+                        {{ form.RCA }}
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="id_Systolic">Systolic:</label>
+                        {{ form.Systolic }}
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="id_Diastolic">Diastolic:</label>
+                        {{ form.Diastolic }}
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="id_Chest_Pain">Chest Pain:</label>
+                        {{ form.Chest_Pain }}
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="id_Diabetic">Diabetic:</label>
+                        {{ form.Diabetic }}
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="id_Cholestrol">Cholesterol:</label>
+                        {{ form.Cholestrol }}
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="id_PHF">PHF:</label>
+                        {{ form.PHF }}
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="form-group">
+                        <label for="id_Add">Additional Information:</label>
+                        {{ form.Add }}
+                    </div>
+                </div>
+            </div>
+            <div class="form-group text-center">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Bootstrap JS (optional, if you need JS components) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
